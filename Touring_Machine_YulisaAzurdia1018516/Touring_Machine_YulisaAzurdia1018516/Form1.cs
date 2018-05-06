@@ -15,6 +15,7 @@ namespace Touring_Machine_YulisaAzurdia1018516
         int actual_state = 0;
         int head = 0;
         int[] sumStates = new int[] { 0, 1, 2, 3 };
+        int[] subStates = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 };
 
         public Form1()
         {
@@ -70,138 +71,402 @@ namespace Touring_Machine_YulisaAzurdia1018516
             }
             else if (comboBox1.SelectedItem.ToString() == "Resta")
             {
-                MessageBox.Show("");
+                string text = textBox1.Text;
+                text.Trim();
+                var actualOne = text.ToArray();
+                string[] array = new string[(text.Length) * 2];
+                int i = 0;
+                array[0] = "B";
+                dataGridView1.Columns.Add(i.ToString(), i.ToString());
+                this.dataGridView1.Rows[0].Cells[0].Value = array[0].ToString();
+                dataGridView1.Columns[0].Width = 20;
+                for (i = 0; i < actualOne.Length; i++)
+                {
+                    array[i + 1] = actualOne[i].ToString();
+                    dataGridView1.Columns.Add((i + 1).ToString(), (i + 1).ToString());
+                    this.dataGridView1.Rows[0].Cells[i + 1].Value = array[i + 1];
+                    dataGridView1.Columns[i + 1].Width = 20;
+
+                }
+                for (int k = i + 1; k < array.Length; k++)
+                {
+                    array[k] = "B";
+                    dataGridView1.Columns.Add(k.ToString(), "");
+                    this.dataGridView1.Rows[0].Cells[k].Value = array[i + 1];
+                    dataGridView1.Columns[k].Width = 20;
+                }
+                timer1.Enabled = true;
             }
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            string position = dataGridView1.Rows[0].Cells[head].Value.ToString();
-
-            switch (actual_state)
+            if (comboBox1.SelectedItem.ToString() == "Suma")
             {
-                case (0):
-                    
-                    if (position == "|")
-                    {
-                        dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
-                        dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
-                        dataGridView1.Rows[0].Cells[head].Value = "X";                       
-                        head++;
-                        label1.Text = "q1";
-                        actual_state = sumStates[1];
-                        
-                    }
-                    else if (position == "+")
-                    {
-                        dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
-                        dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
-                        dataGridView1.Rows[0].Cells[head].Value = "+";
-                        head++;
-                        label1.Text = "q0";
-                        actual_state = sumStates[0];
-                    }
-                    else if (position == "=")
-                    {
-                        dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
-                        dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
-                        dataGridView1.Rows[0].Cells[head].Value = "=";                        
-                        head--;
-                        label1.Text = "q3";
-                        actual_state = sumStates[3];
-                        
-                        timer1.Enabled = false;
-                    }
-                    else if (position == "B")
-                    {                       
-                        dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.White;
-                        dataGridView1.Rows[0].Cells[head].Value = "B";
-                        head++;
-                        label1.Text = "q0";
-                        actual_state = sumStates[0];
-                    }
-                    break;
-                case (1):
-                    if (position == "|")
-                    {
-                        dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
-                        dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
-                        dataGridView1.Rows[0].Cells[head].Value = "|";
-                        head++;
-                        label1.Text = "q1";
-                        actual_state = sumStates[1];
-                    }
-                    else if (position == "+")
-                    {
-                        dataGridView1.Rows[0].Cells[head-1].Style.BackColor = Color.White;
-                        dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
-                        dataGridView1.Rows[0].Cells[head].Value = "+";
-                        head++;
-                        label1.Text = "q1";
-                        actual_state = sumStates[1];
-                        
-                    }
-                    else if (position == "=")
-                    {
-                        dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
-                        dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
-                        dataGridView1.Rows[0].Cells[head].Value = "=";
-                        head++;
-                        label1.Text = "q1";
-                        actual_state = sumStates[1];
-                        
-                    }
-                    else if (position == "B")
-                    {
-                        dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
-                        dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
-                        dataGridView1.Rows[0].Cells[head].Value = "|";
-                        head--;
-                        label1.Text = "q2";
-                        actual_state = sumStates[2];                        
-                    }
-                    break;
-                case (2):
-                    if (position == "|")
-                    {
-                        dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
-                        dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
-                        dataGridView1.Rows[0].Cells[head].Value = "|";
-                        head--;
-                        label1.Text = "q2";
-                        actual_state = sumStates[2];                       
-                    }
-                    else if (position == "+")
-                    {
-                        dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
-                        dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
-                        dataGridView1.Rows[0].Cells[head].Value = "+";
-                        head--;
-                        label1.Text = "q2";
-                        actual_state = sumStates[2];
-                        
-                    }
-                    else if (position == "=")
-                    {
-                        dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
-                        dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
-                        dataGridView1.Rows[0].Cells[head].Value = "=";
-                        head--;
-                        label1.Text = "q2";
-                        actual_state = sumStates[2];
-                    }
-                    else if (position == "X")
-                    {
-                        dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
-                        dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
-                        dataGridView1.Rows[0].Cells[head].Value = "|";
-                        head++;
-                        label1.Text = "q0";
-                        actual_state = sumStates[0];
-                        
-                    }
-                    break;
+                string position = dataGridView1.Rows[0].Cells[head].Value.ToString();
 
+                switch (actual_state)
+                {
+                    case (0):
+
+                        if (position == "|")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "X";
+                            head++;
+                            label1.Text = "q1";
+                            actual_state = sumStates[1];
+
+                        }
+                        else if (position == "+")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "+";
+                            head++;
+                            label1.Text = "q0";
+                            actual_state = sumStates[0];
+                        }
+                        else if (position == "=")
+                        {
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "=";
+                            head--;
+                            label1.Text = "q3";
+                            actual_state = sumStates[3];
+
+                            timer1.Enabled = false;
+                        }
+                        else if (position == "B")
+                        {
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Value = "B";
+                            head++;
+                            label1.Text = "q0";
+                            actual_state = sumStates[0];
+                        }
+                        break;
+                    case (1):
+                        if (position == "|")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "|";
+                            head++;
+                            label1.Text = "q1";
+                            actual_state = sumStates[1];
+                        }
+                        else if (position == "+")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "+";
+                            head++;
+                            label1.Text = "q1";
+                            actual_state = sumStates[1];
+
+                        }
+                        else if (position == "=")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "=";
+                            head++;
+                            label1.Text = "q1";
+                            actual_state = sumStates[1];
+
+                        }
+                        else if (position == "B")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "|";
+                            head--;
+                            label1.Text = "q2";
+                            actual_state = sumStates[2];
+                        }
+                        break;
+                    case (2):
+                        if (position == "|")
+                        {
+                            dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "|";
+                            head--;
+                            label1.Text = "q2";
+                            actual_state = sumStates[2];
+                        }
+                        else if (position == "+")
+                        {
+                            dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "+";
+                            head--;
+                            label1.Text = "q2";
+                            actual_state = sumStates[2];
+
+                        }
+                        else if (position == "=")
+                        {
+                            dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "=";
+                            head--;
+                            label1.Text = "q2";
+                            actual_state = sumStates[2];
+                        }
+                        else if (position == "X")
+                        {
+                            dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "|";
+                            head++;
+                            label1.Text = "q0";
+                            actual_state = sumStates[0];
+
+                        }
+                        break;
+                }
             }
+            else if (comboBox1.SelectedItem.ToString() == "Resta")
+            {
+                string position = dataGridView1.Rows[0].Cells[head].Value.ToString();
+
+                switch (actual_state)
+                {
+                    case (0):
+
+                        if (position == "|")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "X";
+                            head++;
+                            label1.Text = "q1";
+                            actual_state = subStates[1];
+
+                        }
+                        else if (position == "-")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "-";
+                            head++;
+                            label1.Text = "q3";
+                            actual_state = subStates[3];
+                        }
+                        else if (position == "B")
+                        {
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Value = "B";
+                            head++;
+                            label1.Text = "q0";
+                            actual_state = subStates[0];
+                        }
+                        break;
+                    case (1):
+                        if (position == "|")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "|";
+                            head++;
+                            label1.Text = "q1";
+                            actual_state = subStates[1];
+                        }
+                        else if (position == "-")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "-";
+                            head++;
+                            label1.Text = "q1";
+                            actual_state = subStates[1];
+
+                        }
+                        else if (position == "=")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "=";
+                            head++;
+                            label1.Text = "q1";
+                            actual_state = subStates[1];
+
+                        }
+                        else if (position == "B")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "|";
+                            head--;
+                            label1.Text = "q2";
+                            actual_state = sumStates[2];
+                        }
+                        break;
+                    case (2):
+                        if (position == "|")
+                        {
+                            dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "|";
+                            head--;
+                            label1.Text = "q2";
+                            actual_state = subStates[2];
+                        }
+                        else if (position == "-")
+                        {
+                            dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "-";
+                            head--;
+                            label1.Text = "q2";
+                            actual_state = subStates[2];
+
+                        }
+                        else if (position == "=")
+                        {
+                            dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "=";
+                            head--;
+                            label1.Text = "q2";
+                            actual_state = subStates[2];
+                        }
+                        else if (position == "X")
+                        {
+                            dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "|";
+                            head++;
+                            label1.Text = "q0";
+                            actual_state = subStates[0];
+                        }
+                        break;
+                    case (3):
+                        if (position == "-")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "-";
+                            head++;
+                            label1.Text = "q3";
+                            actual_state = subStates[3];
+                        }
+                        else if (position == "=")
+                        {
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "=";
+                            head--;
+                            label1.Text = "q7";
+                            actual_state = subStates[7];
+                            timer1.Enabled = false;
+
+                        }
+                        else if (position == "|")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "X";
+                            head++;
+                            label1.Text = "q4";
+                            actual_state = subStates[4];
+                        }
+                        break;
+                    case (4):
+                        if (position == "-")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "-";
+                            head++;
+                            label1.Text = "q4";
+                            actual_state = subStates[4];
+                        }
+                        else if (position == "=")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "=";
+                            head++;
+                            label1.Text = "q4";
+                            actual_state = subStates[4];
+                        }
+                        else if (position == "|")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "|";
+                            head++;
+                            label1.Text = "q4";
+                            actual_state = subStates[4];
+                        }
+                        else if (position == "B")
+                        {
+                            dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "B";
+                            head--;
+                            label1.Text = "q5";
+                            actual_state = subStates[5];
+                        }
+                        break;
+                    case (5):
+                        if (position == "|")
+                        {
+                            dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "B";
+                            head--;
+                            label1.Text = "q6";
+                            actual_state = subStates[6];
+                        }
+                        break;
+                    case (6):
+                        if (position == "-")
+                        {
+                            dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "-";
+                            head--;
+                            label1.Text = "q6";
+                            actual_state = subStates[6];
+                        }
+                        else if (position == "=")
+                        {
+                            dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "=";
+                            head--;
+                            label1.Text = "q6";
+                            actual_state = subStates[6];
+                        }
+                        else if (position == "|")
+                        {
+                            dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "|";
+                            head--;
+                            label1.Text = "q6";
+                            actual_state = subStates[6];
+                        }
+                        else if (position == "X")
+                        {
+                            dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
+                            dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
+                            dataGridView1.Rows[0].Cells[head].Value = "|";
+                            head++;
+                            label1.Text = "q3";
+                            actual_state = subStates[3];
+                        }
+                        break;
+                        
+                }
+            }
+
+
 
 
         }
