@@ -1602,7 +1602,6 @@ namespace Touring_Machine_YulisaAzurdia1018516
                             label2.Text = countSteps.ToString();
                             actual_state = pathStates[2];                            
                         }
-
                         else if (position == "B")
                         {                           
                             dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
@@ -1764,7 +1763,6 @@ namespace Touring_Machine_YulisaAzurdia1018516
                 }
             }
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
         }
