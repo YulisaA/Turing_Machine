@@ -348,6 +348,7 @@ namespace Touring_Machine_YulisaAzurdia1018516
                             actual_state = sumStates[8];
 
                             timer1.Enabled = false;
+                            MessageBox.Show("Cadena aceptada");
                         }
                         else if (position == "B")
                         {
@@ -747,6 +748,7 @@ namespace Touring_Machine_YulisaAzurdia1018516
                             label2.Text = countSteps.ToString();
                             actual_state = subStates[12];
                             timer1.Enabled = false;
+                            MessageBox.Show("Cadena aceptada");
 
                         }
                         else if (position == "|")
@@ -1259,7 +1261,8 @@ namespace Touring_Machine_YulisaAzurdia1018516
                             dataGridView1.Rows[0].Cells[head - 1].Style.BackColor = Color.White;
                             dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
 
-                            timer1.Enabled = false;                        
+                            timer1.Enabled = false;
+                            MessageBox.Show("Cadena aceptada");
                         break;
                 }
             }
@@ -1480,6 +1483,7 @@ namespace Touring_Machine_YulisaAzurdia1018516
                             dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
                             
                             timer1.Enabled = false;
+                            MessageBox.Show("Cadena aceptada");
                         break;
                 }
             }
@@ -1759,6 +1763,7 @@ namespace Touring_Machine_YulisaAzurdia1018516
                         dataGridView1.Rows[0].Cells[head + 1].Style.BackColor = Color.White;
                         dataGridView1.Rows[0].Cells[head].Style.BackColor = Color.Aqua;
                         timer1.Enabled = false;
+                        MessageBox.Show("Cadena aceptada");
                         break;
                 }
             }
@@ -1773,6 +1778,12 @@ namespace Touring_Machine_YulisaAzurdia1018516
             dataGridView1.Columns.Clear();
             dataGridView1.Refresh();
             label1.Text = "";
+            actual_state = 0;
+            head = 0;
+            countSteps = 0;
+            label2.Text = "";
+            label2.Text = "0";
+            textBox1.Text = "";
         }
 
         private void button3_Click(object sender, EventArgs e)
